@@ -1,0 +1,6 @@
+{
+  "mongoURI": "mongodb+srv://mcmbonu:dmjjmd123@cluster0-marzh.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "hello",
+  "githubClientId": "827e10dbfff2da9a05ed",
+  "githubSecret": "8424c589446a617ca4e70d4d5cb4d838ed493ea0"
+}
