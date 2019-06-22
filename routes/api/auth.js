@@ -9,7 +9,7 @@ const config = require("config");
 const auth = require("../../middleware/auth");
 
 //@route  GET api/auth
-//@desc Test route
+//@desc Get User
 //@access public
 
 router.get("/", auth, async (req, res) => {
@@ -73,7 +73,7 @@ router.post(
       );
     } catch (err) {
       console.error(err.message);
-      res.status(500).send("Server error");
+      return res.status(500).send("Server error");
     }
   }
 );

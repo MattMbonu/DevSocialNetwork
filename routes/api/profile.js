@@ -4,6 +4,7 @@ const { check, validationResult } = require("express-validator/check");
 const User = require("../../models/User");
 const auth = require("../../middleware/auth");
 const Profile = require("../../models/Profile");
+const Post = require("../../models/Post");
 const request = require("request");
 const config = require("config");
 
@@ -144,6 +145,7 @@ router.get("/user/:user_id", async (req, res) => {
 //@access Private
 router.delete("/", auth, async (req, res) => {
   try {
+    await Post.deleteMany({ user: req.user.id });
     await Profile.findOneAndRemove({ user: req.user.id });
     await User.findOneAndRemove({ _id: req.user.id });
     res.json({ msg: "User Account and Profile Deleted" });
@@ -256,21 +258,26 @@ router.put("/education", [
   }
 ]);
 
-//@route  DELETE api/profile/education/edu_id
-//@desc Add Experience
-//@access Private
+// @route    DELETE api/profile/education/:edu_id
+// @desc     Delete education from profile
+// @access   Private
 router.delete("/education/:edu_id", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({ user: req.user.id });
+
+    // Get remove index
     const removeIndex = profile.education
-      .map(edu => edu.id)
+      .map(item => item.id)
       .indexOf(req.params.edu_id);
-    profile.experience.splice(removeIndex, 1);
+
+    profile.education.splice(removeIndex, 1);
+
     await profile.save();
+
     res.json(profile);
   } catch (err) {
     console.error(err.message);
-    return res.status(500).send("Server Error");
+    res.status(500).send("Server Error");
   }
 });
 
