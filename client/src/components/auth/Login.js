@@ -27,7 +27,7 @@ const Login = ({ login, isAuthenticated }) => {
       <h1 className="large text-primary">Sign In</h1>
       <p className="lead">
         <i className="fas fa-user" />
-        Sign Into Your Account
+        {""} Sign Into Your Account
       </p>
       <form onSubmit={e => onSubmit(e)} className="form">
         <div className="form-group">
@@ -51,10 +51,10 @@ const Login = ({ login, isAuthenticated }) => {
             onChange={e => onChange(e)}
           />
         </div>
-        <input type="submit" value="Register" className="btn btn-primary" />
+        <input type="submit" value="Login" className="btn btn-primary" />
       </form>
       <p className="my-1">
-        Already have an account? <Link to="/register">Sign Up</Link>
+        Need an account? <Link to="/register">Sign Up</Link>
       </p>
     </Fragment>
   );
