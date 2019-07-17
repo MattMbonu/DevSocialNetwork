@@ -12,7 +12,14 @@ import {
 
 //Get Current User Profile
 
+export const clearProfile = () => dispatch => {
+  dispatch({
+    type: CLEAR_PROFILE
+  });
+};
+
 export const getProfile = () => async dispatch => {
+  dispatch({ type: CLEAR_PROFILE });
   try {
     const res = await axios.get("/api/profile/me");
     dispatch({
@@ -25,12 +32,6 @@ export const getProfile = () => async dispatch => {
       payload: { msg: err.response.statusText, status: err.response.status }
     });
   }
-};
-
-export const clearProfile = () => dispatch => {
-  dispatch({
-    type: CLEAR_PROFILE
-  });
 };
 
 // Create or Update profile
